@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      My Task CRUD
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tasks</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Input to add tasks -->
+  <ion-item lines="none" class="ion-margin-bottom">
+    <ion-input placeholder="Type a new task..." [(ngModel)]="newTitle" (keyup.enter)="addTask()"></ion-input>
+    <ion-button slot="end" (click)="addTask()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <!-- Task list -->
+  <ion-list>
+    <ion-item-sliding *ngFor="let task of taskService.tasks">
+      <ion-item>
+        <ion-checkbox [checked]="task.completed" (ionChange)="toggleTask(task)"
+          [style.text-decoration]="task.completed ? 'line-through' : 'none'">
+          {{ task.title }}
+        </ion-checkbox>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteTask(task.id)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

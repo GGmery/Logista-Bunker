@@ -1,0 +1,121 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import '@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+:root {
+  --app-radius-lg: 24px;
+  --app-radius-md: 18px;
+  --app-radius-sm: 12px;
+  --app-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+  --app-font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+}
+
+body {
+  font-family: var(--app-font-family);
+  background:
+    radial-gradient(circle at top left, rgba(77, 163, 255, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(0, 230, 118, 0.16), transparent 24%),
+    var(--app-bg);
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+body.theme-dark {
+  --app-bg: #0f1115;
+  --app-surface: #171b22;
+  --app-surface-strong: #1d2330;
+  --app-toolbar: rgba(15, 17, 21, 0.78);
+  --app-card-border: rgba(255, 255, 255, 0.08);
+  --app-text: #f3f5f7;
+  --app-text-soft: #9aa6b2;
+  --app-accent: #00e676;
+  --app-accent-strong: #00c853;
+  --app-danger: #ff5d73;
+  --app-search: #202734;
+  --app-tab-bg: rgba(17, 21, 28, 0.9);
+  --ion-background-color: var(--app-bg);
+  --ion-background-color-rgb: 15, 17, 21;
+  --ion-text-color: var(--app-text);
+  --ion-text-color-rgb: 243, 245, 247;
+  --ion-item-background: var(--app-surface);
+  --ion-toolbar-background: var(--app-toolbar);
+  --ion-border-color: var(--app-card-border);
+  --ion-tab-bar-background: var(--app-tab-bg);
+  --ion-tab-bar-border-color: transparent;
+  color-scheme: dark;
+}
+
+body.theme-light {
+  --app-bg: #f3f6fb;
+  --app-surface: #ffffff;
+  --app-surface-strong: #eef4ff;
+  --app-toolbar: rgba(243, 246, 251, 0.9);
+  --app-card-border: rgba(38, 60, 85, 0.08);
+  --app-text: #17212b;
+  --app-text-soft: #5f6f82;
+  --app-accent: #0f9d58;
+  --app-accent-strong: #087443;
+  --app-danger: #d63d58;
+  --app-search: #edf2f8;
+  --app-tab-bg: rgba(255, 255, 255, 0.86);
+  --ion-background-color: var(--app-bg);
+  --ion-background-color-rgb: 243, 246, 251;
+  --ion-text-color: var(--app-text);
+  --ion-text-color-rgb: 23, 33, 43;
+  --ion-item-background: var(--app-surface);
+  --ion-toolbar-background: var(--app-toolbar);
+  --ion-border-color: var(--app-card-border);
+  --ion-tab-bar-background: var(--app-tab-bg);
+  --ion-tab-bar-border-color: transparent;
+  color-scheme: light;
+}
+
+ion-app,
+ion-content,
+ion-header,
+ion-toolbar,
+ion-tab-bar {
+  --color: var(--app-text);
+}
+
+ion-tab-bar {
+  margin: 0 16px 16px;
+  border: 1px solid var(--app-card-border);
+  border-radius: 22px;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--app-shadow);
+  overflow: hidden;
+}
+
+ion-tab-button {
+  --color: var(--app-text-soft);
+  --color-selected: var(--app-accent);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+ion-header ion-toolbar {
+  --background: transparent;
+}

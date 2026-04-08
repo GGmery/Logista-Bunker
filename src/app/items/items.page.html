@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar class="top-toolbar">
+    <div class="toolbar-shell">
+      <div>
+        <span class="eyebrow">Logista Bunker</span>
+        <ion-title>Inventario del búnker</ion-title>
+      </div>
+      <ion-button fill="clear" class="theme-toggle" (click)="toggleTheme()">
+        <ion-icon
+          slot="icon-only"
+          [name]="themeService.isDarkMode() ? 'sunny-outline' : 'moon-outline'">
+        </ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+  <ion-toolbar class="search-toolbar">
+    <div class="hero-card">
+      <div class="hero-copy">
+        <h2>Control rápido de recursos</h2>
+        <p>Consulta reservas, detecta stock bajo y ajusta cantidades en segundos.</p>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric-pill">
+          <span class="metric-value">{{ items.length }}</span>
+          <span class="metric-label">objetos</span>
+        </div>
+        <div class="metric-pill warning">
+          <span class="metric-value">{{ lowStockCount }}</span>
+          <span class="metric-label">críticos</span>
+        </div>
+        <div class="metric-pill accent">
+          <span class="metric-value">{{ totalUnits }}</span>
+          <span class="metric-label">unidades</span>
+        </div>
+      </div>
+      <ion-searchbar
+        [(ngModel)]="filter"
+        (ionInput)="loadItems()"
+        placeholder="Buscar objeto o categoría..."
+        [debounce]="300">
+      </ion-searchbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content-shell">
+  <ion-list lines="none" *ngIf="items.length > 0; else emptyState">
+    <ion-item-sliding *ngFor="let item of items">
+      <ion-item class="inventory-item">
+        <ion-label>
+          <h2 class="item-name">{{ item.name }}</h2>
+          <p class="item-category">{{ item.category_name | uppercase }}</p>
+        </ion-label>
+        <div slot="end" class="stock-controls">
+          <span class="stock-label" [class.low-stock]="item.quantity < 5">
+            Stock: {{ item.quantity }}
+            <ion-icon *ngIf="item.quantity < 5" name="warning-outline" class="warn-icon"></ion-icon>
+          </span>
+          <div class="qty-buttons">
+            <ion-button fill="clear" class="qty-btn" (click)="updateQuantity(item, -1)">
+              <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" class="qty-btn" (click)="updateQuantity(item, 1)">
+              <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteItem(item.id!)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/item-form">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ng-template #emptyState>
+    <div class="empty-state">
+      <h2>No hay objetos en inventario</h2>
+      <p>Activa tu inventario con el botón + o revisa la sincronización de la base local.</p>
+    </div>
+  </ng-template>
+</ion-content>

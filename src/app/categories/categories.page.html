@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar class="top-toolbar">
+    <div class="toolbar-shell">
+      <div>
+        <span class="eyebrow">Clasificación</span>
+        <ion-title>Categorías</ion-title>
+      </div>
+      <ion-button fill="clear" class="theme-toggle" (click)="toggleTheme()">
+        <ion-icon
+          slot="icon-only"
+          [name]="themeService.isDarkMode() ? 'sunny-outline' : 'moon-outline'">
+        </ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content-shell">
+    <section class="category-hero">
+      <div>
+        <span class="hero-badge">{{ categories.length }} áreas activas</span>
+        <h2>Organiza cada suministro con criterio táctico</h2>
+        <p>Separa alimentos, medicinas, energía y herramientas para acelerar búsquedas y control.</p>
+      </div>
+    </section>
+
+    <div class="add-category-form">
+      <ion-item class="input-item">
+        <ion-input
+          [(ngModel)]="newCategory"
+          placeholder="Nueva categoría..."
+          (keyup.enter)="addCategory()">
+        </ion-input>
+      </ion-item>
+      <ion-button expand="block" class="add-btn" (click)="addCategory()">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        Añadir categoría
+      </ion-button>
+    </div>
+
+    <ion-list lines="none">
+      <ion-item-sliding *ngFor="let category of categories">
+        <ion-item class="category-item">
+          <div class="category-avatar" slot="start">
+            <ion-icon name="folder-open-outline" class="cat-icon"></ion-icon>
+          </div>
+          <ion-label>
+            <h2>{{ category.name }}</h2>
+            <p>Clasificación disponible para el inventario</p>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="deleteCategory(category.id!)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+</ion-content>
